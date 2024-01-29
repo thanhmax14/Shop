@@ -6,7 +6,9 @@ package DAOS;
 
 import DB.DBConnection;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,6 +26,19 @@ public class CategoriesDAOS {
         } catch (SQLException ex) {
             Logger.getLogger(CategoriesDAOS.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public ResultSet getAllCategory() {
+        ResultSet rs = null;
+
+        try {
+            Statement st = conn.createStatement();
+            rs = st.executeQuery("select * from Categories where CateStatus =0 ");
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoriesDAOS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
+
     }
 
 }

@@ -4,6 +4,9 @@
     Author     : Nguyen Hoang Nha - CE170092
 --%>
 
+<%@page import="DAOS.ProductDAOS"%>
+<%@page import="DAOS.CategoriesDAOS"%>
+<%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -155,53 +158,64 @@
         <!-- ***** Main Banner Area End ***** -->
 
         <!-- ***** Men Area Starts ***** -->
+        <%
+            CategoriesDAOS cateDaos = new CategoriesDAOS();
+            ResultSet rs = cateDaos.getAllCategory();
+            while (rs.next()) {
+        %>
 
-      
         <section class="section" id='men'>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="section-heading">
-                            <h2></h2>
-                            <span></span>
+                            <h2><%= rs.getString("CateName")%></h2>
+                            <span> <%= rs.getString("CateDescription")%>  </span>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="men-item-carousel">
-                            <div class="owl-men-item owl-carousel">
-
-                                
-
+                            <div class="owl-men-item owl-carousel">                               
+                                <%
+                                    ProductDAOS pdaos = new ProductDAOS();
+                                    ResultSet rsProduct = pdaos.getAllProductByCategory(rs.getInt("CateID"));
+                                    while (rsProduct.next()) {
+                                %>
                                 <div class="item">
                                     <div class="thumb">
                                         <div class="hover-content">
                                             <ul>
-                                                <li><a href=''><i class="fa fa-eye"></i></a></li>
+                                                <li><a href='<%= rsProduct.getInt("ProductID")%>'><i class="fa fa-eye"></i></a></li>
                                                 <li><a onclick='addToCart()'><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
-                                        <img src='/resources/images/' alt="">
+                                        <img src='<%= rsProduct.getString("Image")%>' alt="">
                                     </div>
                                     <div class="down-content">
-                                        <h4></h4>
+                                        <h4><%= rsProduct.getString("ProName")%></h4>
                                         <div class="row d-flex justify-content-between">
-                                            <div class="col-md-6"><span class="text-danger"></span></div>
-                                            <div class="col-md-6"><p > </span></div>
+                                            <div class="col-md-6"><span class="text-danger"><%= rsProduct.getInt("Price")%></span></div>
+                                            <div class="col-md-6"><p >Branname </span></div>
                                         </div>
 
-                                        <small>Chỉ còn  sản phẩm</small>
+                                        <small>Chỉ còn <%= rsProduct.getInt("Quantity")%> sản phẩm</small>
                                     </div>
                                 </div>
+                                <%}%>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <%}%>
+
+
         <!-- ***** Explore Area Starts ***** -->
         <section class="section" id="explore">
             <div class="container">
@@ -433,7 +447,7 @@
                                                             }
                                                         });
                                                     }
-
+                                                    
         </script>
 
     </body>
