@@ -4,6 +4,7 @@
     Author     : Nguyen Hoang Nha - CE170092
 --%>
 
+<%@page import="Models.Users"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@taglib  prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
@@ -14,6 +15,8 @@
         <title>JSP Page</title>
     </head>
     <body>
+
+
 
         <header class="header-area header-sticky">
             <div class="container">
@@ -33,23 +36,24 @@
 
                                 <li class="scroll-to-section"><a href="">Giỏ hàng (<span class='text-danger'>2</span>)</a></li>
 
-
+                                <%
+                                    Boolean checck = (Boolean) session.getAttribute("checklogin");
+                                    if (checck != null && checck) {
+                                        Users infoUser = (Users) session.getAttribute("infoUser");
+                                %>
                                 <li class="submenu">
-                                    <a href="javascript:;">${sessionScope.fullname}</a>
+                                    <a href="javascript:;"><%= infoUser.getFullname()%></a>
                                     <ul>
                                         <li><a class='text-info' href="">Thông tin tài khoản</a></li>
                                         <li><a href="" class='text-info'>Đơn hàng</a></li>
-                                        <li><a class='text-info' href="" >Đăng xuất</a></li>
-                                        <!--<li><a href="#">Log Out</a></li>-->
-                                        <!--<li><a rel="nofollow" href="ttps://templatemo.com/page/4" target="_blank">Template Page 4</a></li>-->
+                                        <li><a href="" class='text-info'>Đơn hàng</a></li>
+                                        <li><a href="" class='text-info'>Đơn hàng</a></li> 
+                                        <li><a class='text-info' href="/CustomerController/Logout" >Đăng xuất</a></li>
                                     </ul>
                                 </li>
-
-
-                               
-                                    <li><a class='text-info' href="" class="btn btn-primary btn-block">Đăng nhập</a></li>
-                            
-                            
+                                <% } else { %>
+                                <li><a class='text-info' href="/LoginController" class="btn btn-primary btn-block">Đăng nhập</a></li>
+                                    <% }%>
                             </ul>
                             <a class='menu-trigger'>
                                 <span>Menu</span>

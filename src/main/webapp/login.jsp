@@ -11,6 +11,7 @@
         <meta charset="UTF-8">
         <title>Login</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+        <link rel="stylesheet" href="/resources/UserAssets/css/buttonlogin.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons'><link rel="stylesheet" href="./style.css">
@@ -278,6 +279,8 @@
                 background: #FFFFFF !important;
                 color: #4285F4 !important;
             }
+
+
         </style>
         <script type="text/javascript">
 
@@ -291,10 +294,10 @@
             <div class="form-toggle"></div>
             <div class="form-panel one">
                 <div class="form-header">
-                    <h1>Đăng nhập</h1>
+                    <h1 style="text-align: center">Đăng nhập</h1>
                 </div>
                 <div class="form-content">
-                    <form class="form-signin" action="" method="post">
+                    <form action="LoginController"method="post" class="form-signin"  >
                         <div class="form-group">
                             <label for="username">Tên đăng nhập hoặc email</label>
                             <input name="user"  type="text" required="required"/>
@@ -302,24 +305,43 @@
                         <div class="form-group">
                             <label for="password">Mật khẩu</label>
                             <input name="pass"  type="password" required="required"/>
+
                         </div>
-                        <div> <p class="text-danger"></p></div>
+                        <div> <p class="text-danger">${mess}</p></div>
+
                         <div class="form-group">
                             <a class="form-recovery" href="">Quên mật khẩu?</a>
-                            </label><a class="form-recovery" href="">Đăng ký?</a>
+                            </label><a class="form-recovery" href="/LoginController/Register">Đăng ký?</a>
                         </div>
-                      <input type="submit" name="submit" value="Login" class="btn btn-primary btn-block mb-4"/></div>
-                    </form>
-                  
-                </div>
-            </div>
-            
-        </div>
-    </div>
-    <div class="pen-footer"><a href="/UserHomeController"><i class="material-icons">arrow_backward</i>Về trang chủ</a><a href="#" target="_blank">Contact ?<i class="material-icons">arrow_forward</i></a></div>
-    <!-- partial -->
+                    <input type="submit" name="btnLogin" value="Login" class="btn btn-primary btn-block mb-4"/></div>
+                </form>
 
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src='https://codepen.io/andytran/pen/vLmRVp.js'></script><script src="./script.js"></script>
+                <button style="width: 600px;position: relative;left: 25px" class="gsi-material-button"  onclick="window.location.href = 'https://accounts.google.com/o/oauth2/auth?scope=profile email&redirect_uri=http://localhost:8080/login&response_type=code&client_id=747323838303-suna7j6e4b1f7r4kim0imkpubtbd76fd.apps.googleusercontent.com&approval_prompt=force'" >
+                    <div class="gsi-material-button-state"></div>
+                    <div class="gsi-material-button-content-wrapper">
+                        <div class="gsi-material-button-icon">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: block;">
+                            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
+                            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
+                            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
+                            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
+                            <path fill="none" d="M0 0h48v48H0z"></path>
+                            </svg>
+                        </div>
+                        <span class="gsi-material-button-contents">Sign in with Google</span>
+                        <span style="display: none;">Sign in with Google</span>
+                    </div>
+                </button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="pen-footer"><a href="/UserHomeController"><i class="material-icons">arrow_backward</i>Về trang chủ</a><a href="#" target="_blank">Contact ?<i class="material-icons">arrow_forward</i></a></div>
+<!-- partial -->
 </body>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://codepen.io/andytran/pen/vLmRVp.js'></script><script src="./script.js"></script>
+
 </html>
