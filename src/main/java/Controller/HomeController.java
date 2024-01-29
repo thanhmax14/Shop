@@ -10,6 +10,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -55,6 +56,7 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
 
         String path = request.getRequestURI();
         if (path.endsWith("/")) {
@@ -62,7 +64,8 @@ public class HomeController extends HttpServlet {
         }
         if (path.startsWith("/HomeController/Product")) {
             String s[] = path.split("/");
-            
+            String pro_id = s[s.length - 1];
+            session.setAttribute("pro_id", pro_id);
             request.getRequestDispatcher("/product-detail.jsp").forward(request, response);
         }
     }

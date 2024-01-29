@@ -199,7 +199,7 @@
                                     <div class="down-content">
                                         <h4><%= rsProduct.getString("ProName")%></h4>
                                         <div class="row d-flex justify-content-between">
-                                            <div class="col-md-6"><span class="text-danger"><%= rsProduct.getInt("Price")%></span></div>
+                                            <div class="col-md-6"><span class="text-danger"><%= rsProduct.getInt("Price")%>$</span></div>
                                             <div class="col-md-6"><p >Branname </span></div>
                                         </div>
 

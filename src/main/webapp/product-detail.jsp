@@ -4,6 +4,8 @@
     Author     : Nguyen Hoang Nha - CE170092
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="DAOS.ProductDAOS"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -28,8 +30,16 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
     <body>
+        <style>
+            .plus {
+                display: inline-block;
+            }
 
-        
+            .hidden {
+                display: none;
+            }
+        </style>
+
 
         <jsp:include page="user-header.jsp" />
         <!-- ***** Header Area End ***** -->
@@ -49,44 +59,55 @@
         </div>
         <!-- ***** Main Banner Area End ***** -->
 
-<% 
-      
-%>
+        <%
+            String proID = (String) session.getAttribute("pro_id");
+            if (proID == null && proID.isEmpty()) {
+                response.sendRedirect("/");
+            } else {
+                ProductDAOS pDao = new ProductDAOS();
+                ResultSet rs = pDao.getProductByProductID(Integer.parseInt(session.getAttribute("pro_id").toString()));
+                if (rs.next()) {
+
+        %>
         <!-- ***** Product Area Starts ***** -->
         <section class="section" id="product">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="left-images">
-                            <img src='' alt="">
+                            <img src='<%= rs.getString("Image")%>' alt="">
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="right-content">
-                            <h4></h4>
-                            <span class="price"></span>
-                            <span>Mô tả: </span>
-                            <span>Loại: ></span>
-                             <span>Thương hiệu: </span>
+                            <h4><%=rs.getString("ProName")%></h4>
+                            <span class="price"><%=rs.getFloat("Price")%></span>
+                            <span>Mô tả: <%= rs.getString("Description")%> </span>
+                            <span>Loại: <%= rs.getString("CateName")%></span>
+                            <span>Thương hiệu: <%= rs.getString("BrandName")%></span>
                             <div class="quantity-content">
                                 <div class="left-content">
-                                    <h6>Số lượng </h6>
+                                    <h6>Số lượng: <%= rs.getInt("Quantity")%></h6>
+                                    <span id="add-error" style="position: relative;bottom: 7px;color: red"></span>
                                 </div>
                                 <div class="right-content">
                                     <div class="quantity buttons_added">
-                                        <input  type="button" value="-" class="minus"><input type="number" id="quan" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+                                        <input type="button" value="-" class="minus">
+                                        <input type="number" id="quan" step="1" min="1" max="<%= rs.getInt("Quantity")%>" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="">
+                                        <input  type="button" value="+" class="plus" id="plusButton">
                                     </div>
                                 </div>
                             </div>
                             <div class="total">
-                                <h4>Tạm tính: <h4 id="total1"></span></h4>
-                                    <div class="main-border-button"><a onclick='addToCart()'>Thêm vào giỏ</a></div>
+                                <h4>Tạm tính: </h4> <h4 style="margin-left: 10px;" id="total1"></h4>$
+                                <div class="main-border-button"><a onclick='addToCart()'>Thêm vào giỏ</a></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
         <!-- ***** Product Area Ends ***** -->
 
         <!-- ***** Footer Start ***** -->
@@ -174,45 +195,57 @@
 
         <!-- Global Init -->
         <script src="/resources/UserAssets/js/custom.js"></script>
-
         <script>
 
-                                        let pr = $(".price").text();
-                                        let que = $("#quan").val();
-                                        $('#total1').text(pr * que);
+                                    let pr = $(".price").text();
+                                    let que = $("#quan").val();
 
-                                        $(".minus").on('click', function (event) {
-                                            que--
-                                            $('#total1').text(pr * que);
-                                        });
-                                        $(".plus").on('click', function (event) {
-                                            que++
-                                            $('#total1').text(pr * que);
-                                        });
+                                    $('#total1').text(pr * que);
 
-
-                                        function addToCart(id) {
-                                            let quan = $("#quan").val();
-                                            $.ajax({
-                                                url: '/UserCartController/AddToCart/' + id + "?quan=" + quan,
-                                                method: 'GET',
-                                                success: function (response) {
-                                                    if (response.success) {
-                                                        Swal.fire({
-                                                            title: 'Thêm vào giỏ hàng thành công!',
-                                                            icon: 'success',
-                                                            showCancelButton: false,
-                                                            confirmButtonText: 'Đồng ý'
-                                                        }).then((result) => {
-                                                            if (result.isConfirmed) {
-                                                                location.reload();
-                                                            }
-                                                        });
-                                                    }
-                                                }
-                                            });
+                                    $(".minus").on('click', function (event) {
+                                        que--
+                                        if (que <= 0) {
+                                            que = 1;
                                         }
+                                        if (que < <%= rs.getInt("Quantity")%>) {
+                                            $("#add-error").text("");
+                                        }
+                                        $('#total1').text(pr * que);
+                                    });
+                                    $(".plus").on('click', function (event) {
+                                        que++
+                                        if (que >= <%= rs.getInt("Quantity")%>) {
+                                            $("#add-error").text("Bạn đã chọn tối đa!!");
+                                            que = <%= rs.getInt("Quantity")%>;
+                                        }
+                                        $('#total1').text(pr * que);
+                                    });
+
+
+                                    function addToCart(id) {
+                                        let quan = $("#quan").val();
+                                        $.ajax({
+                                            url: '/UserCartController/AddToCart/' + id + "?quan=" + quan,
+                                            method: 'GET',
+                                            success: function (response) {
+                                                if (response.success) {
+                                                    Swal.fire({
+                                                        title: 'Thêm vào giỏ hàng thành công!',
+                                                        icon: 'success',
+                                                        showCancelButton: false,
+                                                        confirmButtonText: 'Đồng ý'
+                                                    }).then((result) => {
+                                                        if (result.isConfirmed) {
+                                                            location.reload();
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        });
+                                    }
 
         </script>
+        <%}
+            }%>
     </body>
 </html>

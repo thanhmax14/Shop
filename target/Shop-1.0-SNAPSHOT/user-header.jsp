@@ -24,7 +24,7 @@
                     <div class="col-12">
                         <nav class="main-nav">
                             <!-- ***** Logo Start ***** -->
-                            <a href="" class="logo">
+                            <a href="/" class="logo">
                                 <img src="/resources/UserAssets/images/white-logo.png">
                             </a>
                             <!-- ***** Logo End ***** -->
