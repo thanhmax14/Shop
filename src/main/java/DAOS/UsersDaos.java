@@ -34,9 +34,11 @@ public class UsersDaos {
         Users us = null;
         try {
 
-            PreparedStatement ps = conn.prepareStatement("select * from Users where Username=? and [Password]=? ");
+            PreparedStatement ps = conn.prepareStatement("select * from Users where (Username=? and [Password]=? ) or Email=? and [Password]=?");
             ps.setString(1, user);
             ps.setString(2, passw);
+            ps.setString(3, user);
+            ps.setString(4, passw);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 us = new Users(rs.getString("Username"), rs.getString("Fullname"), rs.getString("Email"), rs.getInt("Phone"),
@@ -75,7 +77,7 @@ public class UsersDaos {
         try {
             PreparedStatement ps = conn.prepareStatement("Insert into Users values(?,?,?,'','Customer','','','','','0','',?)");
             ps.setString(1, info.getEmail());
-            ps.setString(2, info.getGiven_name());
+            ps.setString(2, info.getName());
             ps.setString(3, info.getEmail());
             ps.setString(4, info.getPicture());
             count = ps.executeUpdate();
