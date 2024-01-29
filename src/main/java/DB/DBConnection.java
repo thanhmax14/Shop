@@ -22,9 +22,11 @@ public class DBConnection {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
         // tao doi thuong thu thi cau lenh
-//        Connection conn = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-1E1A6I4:1433;databaseName=showShop2;user=sa;password=Thanh;encrypt=true;trustServerCertificate=true;");
-        Connection conn = DriverManager.getConnection("jdbc:sqlserver://LAPTOP-CHPUKQ9I\\SQLEXPRESS:1433;databaseName=showShop2;user=sa;password=Ly0394509954;encrypt=true;trustServerCertificate=true;");
-
+//        Connection conn = DriverManager.getConnection("jdbc:sqlserver://LAPTOP-CHPUKQ9I\\SQLEXPRESS:1433;databaseName=showShop2;user=sa;password=Ly0394509954;encrypt=true;trustServerCertificate=true;");
+//                    
+        //cua thanh
+         Connection conn = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-1E1A6I4:1433;databaseName=showShop2;user=sa;password=Thanh;encrypt=true;trustServerCertificate=true;");
+       
         return conn;
     }
     
