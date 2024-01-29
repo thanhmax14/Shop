@@ -18,6 +18,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.Date;
+import org.apache.commons.codec.digest.Md5Crypt;
 
 /**
  *
@@ -104,6 +106,25 @@ public class LoginController extends HttpServlet {
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
             }
             response.sendRedirect(URL);
+        }
+        if (request.getParameter("register") != null) {
+            String UserName = request.getParameter("user");
+            String fullName = request.getParameter("fullname");
+            String PassWord = request.getParameter("pass");
+            String Email = request.getParameter("email");
+            int SDT = Integer.parseInt(request.getParameter("phone"));
+            // Chuyển đổi chuỗi ngày thành đối tượng java.sql.Date
+            Date date = Date.valueOf("2003-06-21");
+            // Tạo đối tượng Users với ngày đăng ký được thiết lập
+            Users us = new Users(UserName, fullName, Email, SDT, "Customer", "", date, "", Hash.MD5.getMd5(PassWord), 0, "", "");
+            UsersDaos usDaos = new UsersDaos();
+            Users us1 = usDaos.register(us);
+            if(us1 == null) {
+                response.sendRedirect("/LoginController/Register");
+            } else {
+                session.setAttribute("Username", UserName);
+                response.sendRedirect("/");
+            }
         }
     }
 

@@ -61,6 +61,8 @@ public class CustomerController extends HttpServlet {
             HttpSession session = request.getSession();
             session.invalidate();
             response.sendRedirect("/");
+        } else if(path.endsWith("/CustomerController/profileUser")) {
+          request.getRequestDispatcher("/profileUser.jsp").forward(request, response);
         }
     }
 

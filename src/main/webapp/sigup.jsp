@@ -336,7 +336,7 @@
                 <div class="form-header">
                     <h1>Đăng ký</h1>
                 </div>
-                <form action="/SigUpController" method="post" class="form-signup" onsubmit="return check()">
+                <form action="/LoginController" method="post" class="form-signup" onsubmit="return check1()">
                     <div class="form-group">
                         <label for="fullname">Họ tên</label>
                         <input name="fullname" type="text" id="user-fullname" required="required"/>

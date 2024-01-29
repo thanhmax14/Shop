@@ -25,7 +25,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="/UserHomeController" method="post">
+                            <form action="/CustomerController" method="post">
                                 <div class="form-group row">
                                     <label for="username" class="col-4 col-form-label">Tên ??ng nh?p</label> 
                                     <div class="col-8">

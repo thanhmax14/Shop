@@ -1,9 +1,9 @@
+Controller\HomeController.class
+Hash\MD5.class
 LoginWithGoogle\GoogleUtils.class
 LoginWithGoogle\GooglePojo.class
 DAOS\UsersDaos.class
 Controller\LoginController.class
-Controller\HomeController.class
 DB\DBConnection.class
 Models\Users.class
-Hash\MD5.class
 LoginWithGoogle\Constants.class

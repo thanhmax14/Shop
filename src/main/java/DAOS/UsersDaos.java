@@ -87,4 +87,20 @@ public class UsersDaos {
         return count;
 
     }
+
+    public Users register(Users us) {
+        int count = 0;
+        try {
+            PreparedStatement ps = conn.prepareStatement("Insert into [Users] values (?,?,?,?,'Customer','','','',?, '0','','')");
+            ps.setString(1, us.getUsername());
+            ps.setString(2, us.getFullname());
+            ps.setInt(3, us.getPhone());
+            ps.setString(4, us.getEmail());
+            ps.setString(5, us.getPassword());
+            count = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDaos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return (count == 0) ? null : us;
+    }
 }
