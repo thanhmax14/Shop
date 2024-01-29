@@ -191,9 +191,11 @@
                                         <div class="hover-content">
                                             <ul>
                                                 <li><a href='/HomeController/Product/<%= rsProduct.getInt("ProductID")%>'><i class="fa fa-eye"></i></a></li>
-                                                <li><a onclick='addToCart()'><i class="fa fa-shopping-cart"></i></a></li>
+                                                <li><a onclick='addToCart()'><i class="fa-solid fa-cart-plus"></i></a></li>
+                                                <li><a onclick='AddtoWishlist()'><i class="fa-sharp fa-solid fa-heart"></i></i></a></li>
                                             </ul>
                                         </div>
+
                                         <img src='<%= rsProduct.getString("Image")%>' alt="">
                                     </div>
                                     <div class="down-content">
@@ -202,7 +204,6 @@
                                             <div class="col-md-6"><span class="text-danger"><%= rsProduct.getInt("Price")%>$</span></div>
                                             <div class="col-md-6"><p >Branname </span></div>
                                         </div>
-
                                         <small>Chỉ còn <%= rsProduct.getInt("Quantity")%> sản phẩm</small>
                                     </div>
                                 </div>
@@ -214,7 +215,21 @@
             </div>
         </section>
         <%}%>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+                                                    function AddtoWishlist() {
+                                                        Swal.fire({
+                                                            position: "center",
+                                                            icon: "success",
+                                                            title: "Add Wishlist Succsesfully",
+                                                            showConfirmButton: false,
+                                                            timer: 1500
+                                                        });
+                                                    }
 
+
+        </script>
+        <script src="https://kit.fontawesome.com/ead2c7f559.js" crossorigin="anonymous"></script>
 
         <!-- ***** Explore Area Starts ***** -->
         <section class="section" id="explore">
@@ -447,7 +462,7 @@
                                                             }
                                                         });
                                                     }
-                                                    
+
         </script>
 
     </body>

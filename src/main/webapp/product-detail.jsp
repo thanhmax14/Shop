@@ -81,7 +81,7 @@
                     <div class="col-lg-4">
                         <div class="right-content">
                             <h4><%=rs.getString("ProName")%></h4>
-                            <span class="price"><%=rs.getFloat("Price")%></span>
+                            <span class="price"><%=rs.getFloat("Price")%><p></p></span>
                             <span>Mô tả: <%= rs.getString("Description")%> </span>
                             <span>Loại: <%= rs.getString("CateName")%></span>
                             <span>Thương hiệu: <%= rs.getString("BrandName")%></span>
