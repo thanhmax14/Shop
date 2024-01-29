@@ -65,32 +65,8 @@ public class LoginController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String path = request.getRequestURI();
-
-        HttpSession session = request.getSession();
-        String code = request.getParameter("code");
-        if (code == null || code.isEmpty()) {
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
-        } else {
-            Gson gson = new Gson();
-            String accessToken = GoogleUtils.getToken(code);
-            GooglePojo googlePojo = GoogleUtils.getUserInfo(accessToken);
-            String link = Constants.GOOGLE_LINK_GET_USER_INFO + accessToken;
-            if (googlePojo.isVerified_email()) {
-                session.setAttribute("link", link);
-                session.setAttribute("info", googlePojo);
-                UsersDaos us = new UsersDaos();
-                int count = us.siginWithGoogle(googlePojo);
-                if (count != 0) {
-                    response.sendRedirect("/");
-                } else {
-                    response.sendRedirect("/LoginController");
-                }
-            }
-        }
-
         if (path.endsWith("/LoginController")) {
             request.getRequestDispatcher("/login.jsp").forward(request, response);
-
         }
         if (path.startsWith("/LoginController/Register")) {
             request.getRequestDispatcher("/sigup.jsp").forward(request, response);

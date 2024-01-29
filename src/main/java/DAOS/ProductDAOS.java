@@ -55,7 +55,21 @@ public class ProductDAOS {
             Logger.getLogger(ProductDAOS.class.getName()).log(Level.SEVERE, null, ex);
         }
         return rs;
+    }
 
+    public ResultSet getProductByProductID(int proID) {
+        ResultSet rs = null;
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT    * FROM  Brands INNER JOIN Products ON Brands.BrandID = Products.BrandID"
+                    + " INNER JOIN Categories ON Products.CateID = Categories.CateID"
+                    + " where ProductID=? and ProStatus=0 and Quantity"
+                    + " > 0 and Categories.CateStatus=0 and Brands.BrandStatus=0");
+            ps.setInt(1, proID);
+            rs = ps.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAOS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
     }
 
 }

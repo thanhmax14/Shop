@@ -55,11 +55,15 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("index.jsp").forward(request, response);
 
         String path = request.getRequestURI();
-        if (path.startsWith("/HomeController/Product/")) {
-            request.getRequestDispatcher("product-detail.jsp").forward(request, response);
+        if (path.endsWith("/")) {
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
+        if (path.startsWith("/HomeController/Product")) {
+            String s[] = path.split("/");
+            
+            request.getRequestDispatcher("/product-detail.jsp").forward(request, response);
         }
     }
 
