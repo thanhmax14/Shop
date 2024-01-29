@@ -115,8 +115,14 @@ public class LoginController extends HttpServlet {
             UsersDaos UDaos = new UsersDaos();
             Users userModel = UDaos.checkAccount(use, Hash.MD5.getMd5(pass));
             if (userModel != null) {
-                session.setAttribute("checklogin", true);
-                session.setAttribute("infoUser", userModel);
+                if (userModel.getUserType().equalsIgnoreCase("admin")) {
+                    session.setAttribute("checklogin", true);
+                    session.setAttribute("infoUser", userModel);
+                    URL = "/AdminController";
+                } else {
+                    session.setAttribute("checklogin", true);
+                    session.setAttribute("infoUser", userModel);
+                }
             } else {
                 request.setAttribute("mess", "Wrong username or password.");
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
