@@ -66,6 +66,8 @@ public class CustomerController extends HttpServlet {
             response.sendRedirect("/");
         } else if (path.endsWith("/CustomerController/ProfileUser")) {
             request.getRequestDispatcher("/profileUser.jsp").forward(request, response);
+        } else if (path.endsWith("/CustomerController/user-order")) {
+            request.getRequestDispatcher("/user-order.jsp").forward(request, response);
         }
     }
 

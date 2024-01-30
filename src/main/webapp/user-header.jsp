@@ -45,7 +45,7 @@
                                     <a href="javascript:;"><%= infoUser.getFullname()%></a>
                                     <ul>
                                         <li><a class='text-info' href="/CustomerController/ProfileUser">Thông tin tài khoản</a></li>
-                                        <li><a href="" class='text-info'>Đơn hàng</a></li>
+                                        <li><a href="/CustomerController/user-order" class='text-info'>123</a></li>
                                         <li><a href="" class='text-info'>Đơn hàng</a></li>
                                         <li><a href="" class='text-info'>Đơn hàng</a></li> 
                                         <li><a class='text-info' href="/CustomerController/Logout" >Đăng xuất</a></li>
