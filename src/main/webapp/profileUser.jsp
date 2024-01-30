@@ -36,26 +36,26 @@
                                 <div class="form-group row">
                                     <label for="username" class="col-4 col-form-label">UserName</label> 
                                     <div class="col-8">
-                                        <input value="<%= infoUser.getUsername()%>" id="username" name="username"  class="form-control here" required="required" type="text" readonly>
+                                        <input value="<%= infoUser.getUsername() != null ? infoUser.getUsername() : ""%>" id="username" name="username"  class="form-control here" required="required" type="text" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="name" class="col-4 col-form-label">FullName</label> 
                                     <div class="col-8">
-                                        <input value="" id="name" name="name" placeholder="Full Name" class="form-control here" type="text">
+                                        <input value="<%= infoUser.getFullname() != null ? infoUser.getFullname() : ""%>" id="name" name="name" placeholder="Full Name" class="form-control here" type="text">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="email" class="col-4 col-form-label">Email</label> 
                                     <div class="col-8">
-                                        <input value="<%= infoUser.getEmail() %>" id="email" name="email" class="form-control here" type="text" readonly>
+                                        <input value="<%= infoUser.getEmail() != null ? infoUser.getEmail() : ""%>" id="email" name="email" class="form-control here" type="text" readonly>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="lastname" class="col-4 col-form-label">Number Phone</label> 
                                     <div class="col-8">
-                                        <input value="" id="phone" name="phone" placeholder="Phone Number" class="form-control here" type="text">
+                                        <input value="<%= infoUser.getPhone()%>" id="phone" name="phone" placeholder="Phone Number" class="form-control here" type="text">
                                     </div>
                                 </div>
                                 <!--                                <div class="form-group row">
@@ -66,23 +66,24 @@
                                                                 </div>-->
                                 <div class="form-group row">
                                     <label for="email" class="col-4 col-form-label">Gender</label> 
-                                    <input  type="radio" id="gender" name="gender" value="Male"/> Male
-                                    <input  style="margin-left: 30px"type="radio" id="gender" name="gender" value="Female"/>  FeMale  
+                                    <input  type="radio" id="gender" name="gender" value="Male" <%= infoUser.getGender().equalsIgnoreCase("Male") ? "Checked" : ""%>/> Male
+                                    <input  style="margin-left: 30px"type="radio" id="gender" name="gender" value="Female" <%= infoUser.getGender().equalsIgnoreCase("FeMale") ? "Checked" : "" %> />  FeMale  
                                     <br>
 
                                 </div>
                                 <div class="form-group row">
                                     <label for="website" class="col-4 col-form-label">Birthday</label> 
                                     <div class="col-8">
-                                        <input value="" id="birthday" name="birthday" placeholder="website" class="form-control here" type="date">
+                                        <input value="<%= infoUser.getBirthday()%>" id="birthday" name="birthday" placeholder="website" class="form-control here" type="date">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="publicinfo" class="col-4 col-form-label">Address</label> 
                                     <div class="col-8">
-                                        <textarea value="" id="addresss" name="address" cols="40" rows="4" class="form-control"></textarea>
+                                        <textarea id="addresss" name="address" cols="40" rows="4" class="form-control"><%= infoUser.getAddress()%></textarea>
                                     </div>
                                 </div>
+
                                 <!--                                <div class="form-group row">
                                                                     <label for="newpass" class="col-4 col-form-label">New Password</label> 
                                                                     <div class="col-8">
@@ -92,6 +93,7 @@
                                 <div class="form-group row">
                                     <div class="offset-4 col-8">
                                         <button name="update" type="submit" class="btn btn-primary">Edit</button>
+                                        <!--                                        <input type="submit" name="update" value="Update">-->
                                         <a name="back" href="" class="btn btn-secondary">Back Home</a>
                                         <a name="back" href="" class="btn btn-primary">Edit PassWord</a>
 

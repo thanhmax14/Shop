@@ -103,4 +103,23 @@ public class UsersDaos {
         }
         return (count == 0) ? null : us;
     }
+
+    public Users Update(Users Infor) {
+            int count = 0;
+        try {
+            PreparedStatement ps = conn.prepareStatement("update Users set Fullname=?,Email=?,Phone=?,Gender=?,Birthday = ?, [Address]= ? where Username = ?");
+            
+            ps.setString(1, Infor.getFullname());
+            ps.setString(2, Infor.getEmail());
+            ps.setInt(3, Infor.getPhone());
+            ps.setString(4, Infor.getGender());
+            ps.setDate(5, Infor.getBirthday());
+            ps.setString(6, Infor.getAddress());
+            ps.setString(7, Infor.getUsername());
+            count = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDaos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return (count == 0) ? null : Infor;
+    }
 }
