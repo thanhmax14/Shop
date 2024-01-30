@@ -4,6 +4,7 @@
     Author     : Ngo Phuc Vinh - CE170573
 --%>
 
+<%@page import="Models.Users"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,12 +15,18 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
     <body>
+        <%
+            Boolean loggedIn = (Boolean) session.getAttribute("checklogin");
+            if (loggedIn != null && loggedIn) {
+                Users infoUser = (Users) session.getAttribute("infoUser");
+
+        %>
         <div class="col-md-9">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <h4>Thông tin tài kho?n</h4>
+                            <h4>Profile</h4>
                             <hr>
                         </div>
                     </div>
@@ -27,13 +34,13 @@
                         <div class="col-md-12">
                             <form action="/CustomerController" method="post">
                                 <div class="form-group row">
-                                    <label for="username" class="col-4 col-form-label">Tên ??ng nh?p</label> 
+                                    <label for="username" class="col-4 col-form-label">UserName</label> 
                                     <div class="col-8">
-                                        <input value="" id="username" name="username"  class="form-control here" required="required" type="text" readonly>
+                                        <input value="<%= infoUser.getUsername()%>" id="username" name="username"  class="form-control here" required="required" type="text" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="name" class="col-4 col-form-label">H? tên</label> 
+                                    <label for="name" class="col-4 col-form-label">FullName</label> 
                                     <div class="col-8">
                                         <input value="" id="name" name="name" placeholder="Full Name" class="form-control here" type="text">
                                     </div>
@@ -41,37 +48,37 @@
                                 <div class="form-group row">
                                     <label for="email" class="col-4 col-form-label">Email</label> 
                                     <div class="col-8">
-                                        <input value="" id="email" name="email" class="form-control here" type="text" readonly>
+                                        <input value="<%= infoUser.getEmail() %>" id="email" name="email" class="form-control here" type="text" readonly>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="lastname" class="col-4 col-form-label">?i?n tho?i</label> 
+                                    <label for="lastname" class="col-4 col-form-label">Number Phone</label> 
                                     <div class="col-8">
                                         <input value="" id="phone" name="phone" placeholder="Phone Number" class="form-control here" type="text">
                                     </div>
                                 </div>
-<!--                                <div class="form-group row">
-                                    <label for="text" class="col-4 col-form-label">Lo?i tài kho?n</label> 
-                                    <div class="col-8">
-                                        <input hidden="" value="" id="text" name="UserType" placeholder="Nick Name" class="form-control here"  type="text" readonly>
-                                    </div>
-                                </div>-->
+                                <!--                                <div class="form-group row">
+                                                                    <label for="text" class="col-4 col-form-label">Lo?i tài kho?n</label> 
+                                                                    <div class="col-8">
+                                                                        <input hidden="" value="" id="text" name="UserType" placeholder="Nick Name" class="form-control here"  type="text" readonly>
+                                                                    </div>
+                                                                </div>-->
                                 <div class="form-group row">
-                                    <label for="email" class="col-4 col-form-label">Gi?i tính</label> 
-                                    <input  type="radio" id="gender" name="gender" value="Male"/> Nam
-                                    <input  style="margin-left: 30px"type="radio" id="gender" name="gender" value="Female"/> N?
+                                    <label for="email" class="col-4 col-form-label">Gender</label> 
+                                    <input  type="radio" id="gender" name="gender" value="Male"/> Male
+                                    <input  style="margin-left: 30px"type="radio" id="gender" name="gender" value="Female"/>  FeMale  
                                     <br>
-                                 
+
                                 </div>
                                 <div class="form-group row">
-                                    <label for="website" class="col-4 col-form-label">Ngày sinh</label> 
+                                    <label for="website" class="col-4 col-form-label">Birthday</label> 
                                     <div class="col-8">
                                         <input value="" id="birthday" name="birthday" placeholder="website" class="form-control here" type="date">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="publicinfo" class="col-4 col-form-label">??a ch?</label> 
+                                    <label for="publicinfo" class="col-4 col-form-label">Address</label> 
                                     <div class="col-8">
                                         <textarea value="" id="addresss" name="address" cols="40" rows="4" class="form-control"></textarea>
                                     </div>
@@ -84,19 +91,22 @@
                                                                 </div> -->
                                 <div class="form-group row">
                                     <div class="offset-4 col-8">
-                                        <button name="update" type="submit" class="btn btn-primary">C?p nh?t</button>
-                                        <a name="back" href="" class="btn btn-secondary">V? trang ch?</a>
-                                        <a name="back" href="" class="btn btn-primary">Thay ??i m?t kh?u</a>
+                                        <button name="update" type="submit" class="btn btn-primary">Edit</button>
+                                        <a name="back" href="" class="btn btn-secondary">Back Home</a>
+                                        <a name="back" href="" class="btn btn-primary">Edit PassWord</a>
 
                                     </div>
                                 </div>
                             </form>  
+
                         </div>
                     </div>
 
                 </div>
             </div>
         </div>
-
+        <%
+            }
+        %>
     </body>
 </html>

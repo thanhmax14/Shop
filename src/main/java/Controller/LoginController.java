@@ -119,10 +119,12 @@ public class LoginController extends HttpServlet {
             Users us = new Users(UserName, fullName, Email, SDT, "Customer", "", date, "", Hash.MD5.getMd5(PassWord), 0, "", "");
             UsersDaos usDaos = new UsersDaos();
             Users us1 = usDaos.register(us);
-            if(us1 == null) {
+            if (us1 == null) {
                 response.sendRedirect("/LoginController/Register");
             } else {
                 session.setAttribute("Username", UserName);
+                session.setAttribute("FullName", fullName);
+                session.setAttribute("Email", Email);
                 response.sendRedirect("/");
             }
         }

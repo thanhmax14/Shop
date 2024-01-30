@@ -44,7 +44,7 @@
                                 <li class="submenu">
                                     <a href="javascript:;"><%= infoUser.getFullname()%></a>
                                     <ul>
-                                        <li><a class='text-info' href="">Thông tin tài khoản</a></li>
+                                        <li><a class='text-info' href="/CustomerController/ProfileUser">Thông tin tài khoản</a></li>
                                         <li><a href="" class='text-info'>Đơn hàng</a></li>
                                         <li><a href="" class='text-info'>Đơn hàng</a></li>
                                         <li><a href="" class='text-info'>Đơn hàng</a></li> 
