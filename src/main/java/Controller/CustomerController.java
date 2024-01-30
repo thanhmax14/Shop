@@ -4,6 +4,8 @@
  */
 package Controller;
 
+import DAOS.UsersDaos;
+import Models.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.Date;
 
 /**
  *
@@ -77,7 +80,28 @@ public class CustomerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        if (request.getParameter("update") != null) {
+            String userName = request.getParameter("username");
+            String Fullname = request.getParameter("name");
+            String Email = request.getParameter("email");
+            int Phone = Integer.parseInt(request.getParameter("phone"));
+            String Gender = request.getParameter("gender");
+            Date Birthday = Date.valueOf(request.getParameter("birthday"));
+            String Address = request.getParameter("address");
+            Users u1 = new Users(userName, Fullname, Email, Phone, "", Gender, Birthday, Address, "", 0, "", "");
+            UsersDaos usDao = new UsersDaos();
+            Users u2 = usDao.Update(u1);
+            if (u2 == null) {
+                response.sendRedirect("/");
+            } else {
+                Users infoUser = (Users) session.getAttribute("infoUser");
+                Users us3 = usDao.checkAccount(infoUser.getUsername(), infoUser.getPassword());
+                session.setAttribute("infoUser", us3);
+                response.sendRedirect("/CustomerController/ProfileUser");
+            }
+
+        }
     }
 
     /**
