@@ -190,9 +190,19 @@
                                     <div class="thumb">
                                         <div class="hover-content">
                                             <ul>
-                                                <li><a href='/HomeController/Product/<%= rsProduct.getInt("ProductID")%>'><i class="fa fa-eye"></i></a></li>
-                                                <li><a onclick='addToCart()'><i class="fa-solid fa-cart-plus"></i></a></li>
-                                                <li><a onclick='AddtoWishlist()'><i class="fa-sharp fa-solid fa-heart"></i></i></a></li>
+                                                <li><a href='/HomeController/Product/<%= rsProduct.getInt("ProductID")%>' data-toggle="tooltip" data-placement="top" title="Xem chi tiết sản phẩm" id="wishlist-link"  ><i class="fa fa-eye"></i></a></li>
+                                                <li><a onclick='addToCart()'  data-toggle="tooltip" data-placement="top" title="Thêm vào giỏ hàng" id="wishlist-link"  ><i class="fa-solid fa-cart-plus"></i></a></li>
+
+
+                                                <%
+                                                    Boolean checck = (Boolean) session.getAttribute("checklogin");
+                                                    if (checck != null && checck) {
+                                                %>                        
+                                                <li><a onclick='AddtoWishlist()' data-toggle="tooltip" data-placement="top" title="Thêm vào danh sách yêu thích" id="wishlist-link"><i class="fa-sharp fa-solid fa-heart"></i></i></a></li>
+
+                                                <%}%>
+
+
                                             </ul>
                                         </div>
 
@@ -441,27 +451,41 @@
         <!-- Global Init -->
         <script src="/resources/UserAssets/js/custom.js"></script>
         <script>
-                                                    function addToCart(id) {
-                                                        let quan = 1;
-                                                        $.ajax({
-                                                            url: '/UserCartController/AddToCart/' + id + "?quan=" + quan,
-                                                            method: 'GET',
-                                                            success: function (response) {
-                                                                if (response.success) {
-                                                                    Swal.fire({
-                                                                        title: 'Thêm vào giỏ hàng thành công!',
-                                                                        icon: 'success',
-                                                                        showCancelButton: false,
-                                                                        confirmButtonText: 'Đồng ý'
-                                                                    }).then((result) => {
-                                                                        if (result.isConfirmed) {
-                                                                            location.reload();
-                                                                        }
-                                                                    });
-                                                                }
-                                                            }
+                                                    document.addEventListener('DOMContentLoaded', function () {
+                                                        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
+                                                        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                                                            return new bootstrap.Tooltip(tooltipTriggerEl);
                                                         });
-                                                    }
+
+                                                        // Trigger tooltip on mouseover
+                                                        document.getElementById('wishlist-link').addEventListener('mouseover', function () {
+                                                            var tooltip = new bootstrap.Tooltip(document.getElementById('wishlist-link'));
+                                                            tooltip.show();
+                                                        });
+                                                    });
+        </script>
+        <script>
+            function addToCart(id) {
+                let quan = 1;
+                $.ajax({
+                    url: '/UserCartController/AddToCart/' + id + "?quan=" + quan,
+                    method: 'GET',
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire({
+                                title: 'Thêm vào giỏ hàng thành công!',
+                                icon: 'success',
+                                showCancelButton: false,
+                                confirmButtonText: 'Đồng ý'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            });
+                        }
+                    }
+                });
+            }
 
         </script>
 
