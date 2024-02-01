@@ -1,7 +1,6 @@
 <%-- 
     Document   : profileUser
-    Created on : Oct 31, 2023, 8:18:11 PM
-    Author     : Ngo Phuc Vinh - CE170573
+   
 --%>
 
 <%@page import="Models.Users"%>
@@ -9,7 +8,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Tài kho?n</title>
+        <title>ProFile</title>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -21,6 +20,10 @@
                 Users infoUser = (Users) session.getAttribute("infoUser");
 
         %>
+        
+
+        
+        
         <div class="col-md-9">
             <div class="card">
                 <div class="card-body">
@@ -92,7 +95,7 @@
                                                                 </div> -->
                                 <div class="form-group row">
                                     <div class="offset-4 col-8">
-                                        <button name="update" type="submit" class="btn btn-primary">Edit</button>
+                                        <button  name="update" type="submit" class="btn btn-primary">Edit</button>
                                         <!--                                        <input type="submit" name="update" value="Update">-->
                                         <a name="back" href="" class="btn btn-secondary">Back Home</a>
                                         <a name="back" href="" class="btn btn-primary">Edit PassWord</a>
@@ -111,4 +114,5 @@
             }
         %>
     </body>
+   
 </html>
