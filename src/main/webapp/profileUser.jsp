@@ -20,10 +20,10 @@
                 Users infoUser = (Users) session.getAttribute("infoUser");
 
         %>
-        
 
-        
-        
+
+
+
         <div class="col-md-9">
             <div class="card">
                 <div class="card-body">
@@ -58,7 +58,7 @@
                                 <div class="form-group row">
                                     <label for="lastname" class="col-4 col-form-label">Number Phone</label> 
                                     <div class="col-8">
-                                        <input value="<%= infoUser.getPhone()%>" id="phone" name="phone" placeholder="Phone Number" class="form-control here" type="text">
+                                        <input value="<%= infoUser.getPhone() == 0 ? "" : infoUser.getPhone()%>" id="phone" name="phone" placeholder="Phone Number" class="form-control here" type="text"required>
                                     </div>
                                 </div>
                                 <!--                                <div class="form-group row">
@@ -70,14 +70,14 @@
                                 <div class="form-group row">
                                     <label for="email" class="col-4 col-form-label">Gender</label> 
                                     <input  type="radio" id="gender" name="gender" value="Male" <%= infoUser.getGender().equalsIgnoreCase("Male") ? "Checked" : ""%>/> Male
-                                    <input  style="margin-left: 30px"type="radio" id="gender" name="gender" value="Female" <%= infoUser.getGender().equalsIgnoreCase("FeMale") ? "Checked" : "" %> />  FeMale  
+                                    <input  style="margin-left: 30px"type="radio" id="gender" name="gender" value="Female" <%= infoUser.getGender().equalsIgnoreCase("FeMale") ? "Checked" : ""%>  required=""/>  FeMale  
                                     <br>
 
                                 </div>
                                 <div class="form-group row">
                                     <label for="website" class="col-4 col-form-label">Birthday</label> 
                                     <div class="col-8">
-                                        <input value="<%= infoUser.getBirthday()%>" id="birthday" name="birthday" placeholder="website" class="form-control here" type="date">
+                                        <input value="<%= infoUser.getBirthday() != null ? infoUser.getBirthday() : ""%>" id="birthday" name="birthday" placeholder="website" class="form-control here" type="date"required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -114,5 +114,5 @@
             }
         %>
     </body>
-   
+
 </html>

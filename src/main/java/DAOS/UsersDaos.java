@@ -75,7 +75,7 @@ public class UsersDaos {
     public int siginWithGoogle(GooglePojo info) {
         int count = 0;
         try {
-            PreparedStatement ps = conn.prepareStatement("Insert into Users values(?,?,?,'','Customer','','','','','0','',?)");
+            PreparedStatement ps = conn.prepareStatement("Insert into Users values(?,?,?,'','Customer','',NULL,'','','0','',?)");
             ps.setString(1, info.getEmail());
             ps.setString(2, info.getName());
             ps.setString(3, info.getEmail());
@@ -105,10 +105,10 @@ public class UsersDaos {
     }
 
     public Users Update(Users Infor) {
-            int count = 0;
+        int count = 0;
         try {
             PreparedStatement ps = conn.prepareStatement("update Users set Fullname=?,Email=?,Phone=?,Gender=?,Birthday = ?, [Address]= ? where Username = ?");
-            
+
             ps.setString(1, Infor.getFullname());
             ps.setString(2, Infor.getEmail());
             ps.setInt(3, Infor.getPhone());
@@ -120,6 +120,24 @@ public class UsersDaos {
         } catch (SQLException ex) {
             Logger.getLogger(UsersDaos.class.getName()).log(Level.SEVERE, null, ex);
         }
-            return (count == 0) ? null : Infor;
+        return (count == 0) ? null : Infor;
+    }
+
+    public Users checkUserExitByEmail(String email) {
+        Users us = null;
+        try {
+            PreparedStatement ps = conn.prepareStatement("select * from Users where Email=?");
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                us = new Users(rs.getString("Username"), rs.getString("Fullname"), rs.getString("Email"), rs.getInt("Phone"),
+                        rs.getString("UserType"), rs.getString("Gender"), rs.getDate("Birthday"),
+                        rs.getString("Address"), rs.getString("Password"), rs.getInt("UserStatus"),
+                        rs.getString("ResetToken"), rs.getString("image"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDaos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return us;
     }
 }

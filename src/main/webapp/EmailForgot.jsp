@@ -291,24 +291,46 @@
             <div class="form-toggle"></div>
             <div class="form-panel one">
                 <div class="form-header">
-                    <h1>Forgot Password</h1>
+                    <h1 style="text-align: center">Forgot Password</h1>
                 </div>
                 <div class="form-content">
-                    <form class="form-signin" action="/ForgotController/Check" method="post">
+                    <form class="form-signin" action="LoginController" method="post" onsubmit="submit()">
                         <p>Please enter email to reset password.</p>
                         <div class="form-group">
                             <label for="emailforgot">Email</label>
-                            <input name="email"  type="email" required="required"/>
+                            <input name="email"  type="email" required="required" value="${email}" />
+                            <span  style="color: green">${sendsusses}</span>
+                            <span  style="color: red">${sendErro}</span>
                         </div>
-                    <input type="submit" name="submit" value="Confirm" class="btn btn-primary btn-block mb-4"/></div>
+                    <input type="submit" name="submitforgort" value="Confirm" class="btn btn-primary btn-block mb-4"/></div>
                 </form>
-
             </div>
         </div>
 
     </div>
 </div>
-<div class="pen-footer"><a href="/UserHomeController"><i class="material-icons">arrow_backward</i>Back Home</a><a href="#" target="_blank">Contact ?<i class="material-icons">arrow_forward</i></a></div>
+<!--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+                        var comfirmSpan = document.getElementById("comfirm");
+
+                        function submit() {
+                            if (!comfirmSpan) {
+                                Swal.fire({
+                                    position: "center",
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "The 'comfirm' span does not exist.",
+                                    showConfirmButton: true
+                                });
+                                // Chặn form được submit nếu có lỗi
+                                event.preventDefault();
+                            } else {
+                                // Xử lý logic khi form hợp lệ
+                            }
+                        }
+</script>-->
+
+<div class="pen-footer"><a href="/LoginController"><i class="material-icons">arrow_backward</i>Back to login</a><a href="#" target="_blank">Contact ?<i class="material-icons">arrow_forward</i></a></div>
 <!-- partial -->
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>

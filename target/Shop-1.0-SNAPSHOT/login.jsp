@@ -310,7 +310,7 @@
                         <div> <p class="text-danger">${mess}</p></div>
 
                         <div class="form-group">
-                            <a class="form-recovery" href="">Quên mật khẩu?</a>
+                            <a class="form-recovery" href="/ForgotController/Forgot">Quên mật khẩu?</a>
                             </label><a class="form-recovery" href="/LoginController/Register">Đăng ký?</a>
                         </div>
                     <input type="submit" name="btnLogin" value="Login" class="btn btn-primary btn-block mb-4"/></div>
@@ -338,7 +338,7 @@
 
     </div>
 </div>
-<div class="pen-footer"><a href="/UserHomeController"><i class="material-icons">arrow_backward</i>Về trang chủ</a><a href="#" target="_blank">Contact ?<i class="material-icons">arrow_forward</i></a></div>
+<div class="pen-footer"><a href="/"><i class="material-icons">arrow_backward</i>Về trang chủ</a><a href="">Contact ?<i class="material-icons">arrow_forward</i></a></div>
 <!-- partial -->
 </body>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
