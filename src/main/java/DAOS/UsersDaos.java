@@ -107,7 +107,7 @@ public class UsersDaos {
     public Users Update(Users Infor) {
             int count = 0;
         try {
-            PreparedStatement ps = conn.prepareStatement("update Users set Fullname=?,Email=?,Phone=?,Gender=?,Birthday = ?, [Address]= ? where Username = ?");
+            PreparedStatement ps = conn.prepareStatement("update Users set Fullname=?,Email=?,Phone=?,Gender=?,Birthday = ?, Address= ? where Username = ?");
             
             ps.setString(1, Infor.getFullname());
             ps.setString(2, Infor.getEmail());

@@ -6,6 +6,7 @@ package Controller;
 
 import DAOS.UsersDaos;
 import Models.Users;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -83,25 +84,23 @@ public class CustomerController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (request.getParameter("update") != null) {
-            String userName = request.getParameter("username");
+        if ("/ProfileUser".equals(request.getPathInfo())) {
+            String username = request.getParameter("username");
             String Fullname = request.getParameter("name");
             String Email = request.getParameter("email");
             int Phone = Integer.parseInt(request.getParameter("phone"));
             String Gender = request.getParameter("gender");
             Date Birthday = Date.valueOf(request.getParameter("birthday"));
             String Address = request.getParameter("address");
-            Users u1 = new Users(userName, Fullname, Email, Phone, "", Gender, Birthday, Address, "", 0, "", "");
+            Users u1 = new Users(username, Fullname, Email, Phone, "", Gender, Birthday, Address, "", 0, "", "");
             UsersDaos usDao = new UsersDaos();
             Users u2 = usDao.Update(u1);
-            if (u2 == null) {
-                response.sendRedirect("/");
-            } else {
-                Users infoUser = (Users) session.getAttribute("infoUser");
-                Users us3 = usDao.checkAccount(infoUser.getUsername(), infoUser.getPassword());
-                session.setAttribute("infoUser", us3);
-                response.sendRedirect("/CustomerController/ProfileUser");
-            }
+            Users infoUser = (Users) session.getAttribute("infoUser");
+            Users us3 = usDao.checkAccount(infoUser.getUsername(), infoUser.getPassword());
+            session.setAttribute("infoUser", us3);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            PrintWriter out = response.getWriter();
 
         }
     }
