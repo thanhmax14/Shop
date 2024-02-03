@@ -139,4 +139,36 @@ public class UsersDaos {
         }
         return us;
     }
+
+    public int addResetToken(String token, String username) {
+        int count = 0;
+        try {
+            PreparedStatement ps = conn.prepareStatement("update Users set ResetToken=? where Username=?");
+            ps.setString(1, token);
+            ps.setString(2, username);
+            count = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDaos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count != 0 ? 1 : -1;
+    }
+
+    public Users checkTokenReset(String reset) {
+        Users us = null;
+        try {
+            PreparedStatement ps = conn.prepareStatement("select * from Users where ResetToken=?");
+            ps.setString(1, reset);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                us = new Users(rs.getString("Username"), rs.getString("Fullname"), rs.getString("Email"), rs.getInt("Phone"),
+                        rs.getString("UserType"), rs.getString("Gender"), rs.getDate("Birthday"),
+                        rs.getString("Address"), rs.getString("Password"), rs.getInt("UserStatus"),
+                        rs.getString("ResetToken"), rs.getString("image"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDaos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return us;
+    }
+
 }

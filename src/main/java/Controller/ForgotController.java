@@ -60,8 +60,20 @@ public class ForgotController extends HttpServlet {
             throws ServletException, IOException {
 
         String path = request.getRequestURI();
-        if (path.startsWith("/ForgotController/Forgot")) {
+        if (path.endsWith("/ForgotController/Forgot")) {
             request.getRequestDispatcher("/EmailForgot.jsp").forward(request, response);
+        }
+        if (path.startsWith("/ForgotController/Resest/")) {
+            String s[] = path.split("/");
+            String resetPass = s[s.length - 1];
+            UsersDaos uDaos = new UsersDaos();
+            Users userModel = uDaos.checkTokenReset(resetPass);
+            if (userModel == null) {
+               response.sendRedirect("/LoginController");
+            } else {
+                request.getRequestDispatcher("/ChangePassWord.jsp").forward(request, response);
+            }
+
         }
 
     }
@@ -89,9 +101,18 @@ public class ForgotController extends HttpServlet {
             } else {
                 request.setAttribute("sendsusses", "Send email to rest password succses, Please check your email ");
                 SendMail sendMail = new SendMail();
-                sendMail.sendCode(email, Hash.MD5.randomCode(5), "Name");
-                request.setAttribute("sendsusses", "Send email to rest password succses, Please check your email ");
-                request.getRequestDispatcher("/EmailForgot.jsp").forward(request, response);
+                String tokenRest = Hash.MD5.generateRandomString(50);
+                int updatetoken = uDaos.addResetToken(tokenRest, uModel.getUsername());
+                if (updatetoken != -1) {
+                    sendMail.sendCode(email, "http://localhost:8080/ForgotController/Resest/" + tokenRest, uModel.getFullname());
+                    request.setAttribute("sendsusses", "Send email to rest password succses, Please check your email ");
+                    request.getRequestDispatcher("/EmailForgot.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("email", email);
+                    request.setAttribute("comfirm", "comfirm");
+                    request.setAttribute("sendErro", "Please Enter Again!");
+                    request.getRequestDispatcher("/EmailForgot.jsp").forward(request, response);
+                }
             }
         }
     }

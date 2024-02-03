@@ -34,7 +34,7 @@
 
 
 
-                                <li class="scroll-to-section"><a href="">Giỏ hàng (<span class='text-danger'>2</span>)</a></li>
+                                <li class="scroll-to-section"><a href="/CartController">Giỏ hàng (<span class='text-danger'>2</span>)</a></li>
 
                                 <%
                                     Boolean checck = (Boolean) session.getAttribute("checklogin");

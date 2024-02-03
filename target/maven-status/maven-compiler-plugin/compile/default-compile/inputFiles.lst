@@ -11,6 +11,7 @@ D:\SP24\SWP391\GitHub\Shop\src\main\java\Models\Products.java
 D:\SP24\SWP391\GitHub\Shop\src\main\java\Controller\AdminController.java
 D:\SP24\SWP391\GitHub\Shop\src\main\java\DAOS\UsersDaos.java
 D:\SP24\SWP391\GitHub\Shop\src\main\java\Controller\LoginController.java
+D:\SP24\SWP391\GitHub\Shop\src\main\java\Controller\CartController.java
 D:\SP24\SWP391\GitHub\Shop\src\main\java\DB\DBConnection.java
 D:\SP24\SWP391\GitHub\Shop\src\main\java\LoginWithGoogle\GoogleUtils.java
 D:\SP24\SWP391\GitHub\Shop\src\main\java\DAOS\BrandsDAOS.java
