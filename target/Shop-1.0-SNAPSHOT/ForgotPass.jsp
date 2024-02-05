@@ -4,6 +4,7 @@
     Author     : NGO VU HUY
 --%>
 
+<%@page import="Models.Users"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en" >
@@ -282,7 +283,9 @@
         <script type="text/javascript">
 
         </script>
-
+        <%
+            Users us = (Users) session.getAttribute("infors");
+        %>
     </head>
     <body>
         <!-- partial:index.partial.html -->
@@ -298,6 +301,7 @@
                         <div class="form-group">
                             <label for="forgotpass">Mật khẩu mới</label>
                             <input name="forgotpass" id="user-pass"  type="password" required="required"/>
+                            <input  name="reToken" hidden="" value="<%= us.getResetToken()%>">
                         </div>
                         <div class="form-group">
                             <label for="cforgotpass">Nhập lại mật khẩu mới</label>
@@ -305,7 +309,7 @@
                         </div>
                         <div class="error" id="txtRepass" style="color: red"></div
                         <div> <p class="text-danger"></p></div>
-                    <input type="submit" name="submit" value="Xác nhận" class="btn btn-primary btn-block mb-4"/></div>
+                    <input type="submit" name="submitpr" value="Xác nhận" class="btn btn-primary btn-block mb-4"/></div>
                 </form>
 
             </div>

@@ -5,6 +5,7 @@
 package Controller;
 
 import DAOS.UsersDaos;
+import Hash.MD5;
 import Models.Users;
 import SendData.SendMail;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -69,9 +71,11 @@ public class ForgotController extends HttpServlet {
             UsersDaos uDaos = new UsersDaos();
             Users userModel = uDaos.checkTokenReset(resetPass);
             if (userModel == null) {
-               response.sendRedirect("/LoginController");
+                response.sendRedirect("/LoginController");
             } else {
-                request.getRequestDispatcher("/ChangePassWord.jsp").forward(request, response);
+                HttpSession session = request.getSession();
+                session.setAttribute("infors", userModel);
+                request.getRequestDispatcher("/ForgotPass.jsp").forward(request, response);
             }
 
         }
@@ -114,6 +118,15 @@ public class ForgotController extends HttpServlet {
                     request.getRequestDispatcher("/EmailForgot.jsp").forward(request, response);
                 }
             }
+        }
+
+        if (request.getParameter("submitpr") != null) {
+            UsersDaos uDaos = new UsersDaos();
+            String resettoken = request.getParameter("reToken");
+            Users userModel = uDaos.checkTokenReset(resettoken);
+            String pass = request.getParameter("forgotpass");
+            int update = uDaos.updateResetToken(userModel.getUsername(), MD5.getMd5(pass));
+            response.sendRedirect("/LoginController");
         }
     }
 

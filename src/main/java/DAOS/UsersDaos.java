@@ -171,4 +171,19 @@ public class UsersDaos {
         return us;
     }
 
+    public int updateResetToken(String useName, String pass) {
+        int count = 0;
+
+        try {
+            PreparedStatement ps = conn.prepareStatement("update Users set [Password]=? , ResetToken=NULL where Username =?");
+            ps.setString(1, pass);
+            ps.setString(2, useName);
+            count = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDaos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count == 0 ? -1 : count;
+
+    }
+
 }

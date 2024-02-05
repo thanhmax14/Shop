@@ -42,7 +42,7 @@ public class SendMail {
         MimeMessage message = new MimeMessage(session);
         try {
             // Subject
-            message.setSubject("Verrify Email Code.");
+            message.setSubject("Reset Your Password.");
             // TextText          
             String htmlContent = "    <!doctype html>\n"
                             + "    <html>\n"

@@ -294,46 +294,64 @@
                     <h1 style="text-align: center">Forgot Password</h1>
                 </div>
                 <div class="form-content">
-                    <form class="form-signin" action="LoginController" method="post" onsubmit="submit()">
+                    <form class="form-signin" action="LoginController" method="post" onsubmit="return submitForm()">
                         <p>Please enter email to reset password.</p>
                         <div class="form-group">
                             <label for="emailforgot">Email</label>
-                            <input name="email"  type="email" required="required" value="${email}" />
-                            <span  style="color: green">${sendsusses}</span>
-                            <span  style="color: red">${sendErro}</span>
+                            <input id="email" name="email" type="email" required="required" value="${email}" />
+                            <span style="color: green">${sendsusses}</span>
+                            <span id="erro" style="color: red">${sendErro}</span>
                         </div>
-                    <input type="submit" name="submitforgort" value="Confirm" class="btn btn-primary btn-block mb-4"/></div>
-                </form>
-            </div>
-        </div>
+                        <button name="submitforgort" type="submit" value="Confirm" class="btn btn-primary btn-block mb-4">Submit</button>
+                    </form>
+                </div>
 
-    </div>
-</div>
-<!--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-                        var comfirmSpan = document.getElementById("comfirm");
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script>
+                        $(document).ready(function () {
+                            $("#email").blur(function () {
+                                validateEmail();
+                            });
+                        });
 
-                        function submit() {
-                            if (!comfirmSpan) {
-                                Swal.fire({
-                                    position: "center",
-                                    icon: "error",
-                                    title: "Error",
-                                    text: "The 'comfirm' span does not exist.",
-                                    showConfirmButton: true
-                                });
-                                // Chặn form được submit nếu có lỗi
-                                event.preventDefault();
+                        function validateEmail() {
+                            var email = $("#email").val();
+                            if (email.trim() === "") {
+                                $("#erro").text("Vui lòng nhập email.");
+                                return false; // Returning false to prevent form submission
                             } else {
-                                // Xử lý logic khi form hợp lệ
+                                $("#erro").text("");
+                                return true; 
                             }
                         }
-</script>-->
 
-<div class="pen-footer"><a href="/LoginController"><i class="material-icons">arrow_backward</i>Back to login</a><a href="#" target="_blank">Contact ?<i class="material-icons">arrow_forward</i></a></div>
-<!-- partial -->
+                        function submitForm() {
+                            if (validateEmail()) {
+                                Swal.fire({
+                                    position: "center",
+                                    icon: "success",
+                                    title: "Add Wishlist Successfully",
+                                    showConfirmButton: false,
+                                    timer: 5500
+                                });
+                                return true; 
+                            } else {
+                                return false; 
+                            }
+                        }
+                </script>
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src='https://codepen.io/andytran/pen/vLmRVp.js'></script><script src="./script.js"></script>
+
+            </div>
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <div class="pen-footer"><a href="/LoginController"><i class="material-icons">arrow_backward</i>Back to login</a><a href="#" target="_blank">Contact ?<i class="material-icons">arrow_forward</i></a></div>
+    <!-- partial -->
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src='https://codepen.io/andytran/pen/vLmRVp.js'></script><script src="./script.js"></script>
 </body>
 </html>
