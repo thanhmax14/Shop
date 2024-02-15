@@ -378,7 +378,7 @@
             <!--</div>-->
         </div>
     </div>
-    <div class="pen-footer"><a href="/loginController"><i class="material-icons">arrow_backward</i>Back Login</a><a href="#" target="_blank">Contact ?<i class="material-icons">arrow_forward</i></a></div>
+    <div class="pen-footer"><a href="/"><i class="material-icons">arrow_backward</i>Back Login</a><a href="#" target="_blank">Contact ?<i class="material-icons">arrow_forward</i></a></div>
     <!-- partial -->
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>

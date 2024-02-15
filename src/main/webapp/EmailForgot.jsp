@@ -291,27 +291,67 @@
             <div class="form-toggle"></div>
             <div class="form-panel one">
                 <div class="form-header">
-                    <h1>Forgot Password</h1>
+                    <h1 style="text-align: center">Forgot Password</h1>
                 </div>
                 <div class="form-content">
-                    <form class="form-signin" action="/ForgotController/Check" method="post">
+                    <form class="form-signin" action="LoginController" method="post" onsubmit="return submitForm()">
                         <p>Please enter email to reset password.</p>
                         <div class="form-group">
                             <label for="emailforgot">Email</label>
-                            <input name="email"  type="email" required="required"/>
+                            <input id="email" name="email" type="email" required="required" value="${email}" />
+                            <span style="color: green">${sendsusses}</span>
+                            <span id="erro" style="color: red">${sendErro}</span>
                         </div>
-                    <input type="submit" name="submit" value="Confirm" class="btn btn-primary btn-block mb-4"/></div>
-                </form>
+                        <button name="submitforgort" type="submit" value="Confirm" class="btn btn-primary btn-block mb-4">Submit</button>
+                    </form>
+                </div>
+
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script>
+                        $(document).ready(function () {
+                            $("#email").blur(function () {
+                                validateEmail();
+                            });
+                        });
+
+                        function validateEmail() {
+                            var email = $("#email").val();
+                            if (email.trim() === "") {
+                                $("#erro").text("Vui lòng nhập email.");
+                                return false; // Returning false to prevent form submission
+                            } else {
+                                $("#erro").text("");
+                                return true; 
+                            }
+                        }
+
+                        function submitForm() {
+                            if (validateEmail()) {
+                                Swal.fire({
+                                    position: "center",
+                                    icon: "success",
+                                    title: "Add Wishlist Successfully",
+                                    showConfirmButton: false,
+                                    timer: 5500
+                                });
+                                return true; 
+                            } else {
+                                return false; 
+                            }
+                        }
+                </script>
+
 
             </div>
+
         </div>
-
     </div>
-</div>
-<div class="pen-footer"><a href="/UserHomeController"><i class="material-icons">arrow_backward</i>Back Home</a><a href="#" target="_blank">Contact ?<i class="material-icons">arrow_forward</i></a></div>
-<!-- partial -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src='https://codepen.io/andytran/pen/vLmRVp.js'></script><script src="./script.js"></script>
+    <div class="pen-footer"><a href="/LoginController"><i class="material-icons">arrow_backward</i>Back to login</a><a href="#" target="_blank">Contact ?<i class="material-icons">arrow_forward</i></a></div>
+    <!-- partial -->
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src='https://codepen.io/andytran/pen/vLmRVp.js'></script><script src="./script.js"></script>
 </body>
 </html>

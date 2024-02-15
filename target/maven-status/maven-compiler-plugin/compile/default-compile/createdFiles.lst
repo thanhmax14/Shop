@@ -1,3 +1,6 @@
+Controller\ForgotController.class
+SendData\SendMail.class
+Controller\CartController.class
 DAOS\BrandsDAOS.class
 Controller\HomeController.class
 Hash\MD5.class
@@ -10,6 +13,7 @@ DAOS\UsersDaos.class
 DAOS\CategoriesDAOS.class
 Controller\AdminController.class
 DAOS\ProductDAOS.class
+SendData\SendMail$1.class
 Controller\LoginController.class
 Models\Products.class
 DB\DBConnection.class

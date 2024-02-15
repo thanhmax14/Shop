@@ -34,7 +34,7 @@
 
 
 
-                                <li class="scroll-to-section"><a href="">Giỏ hàng (<span class='text-danger'>2</span>)</a></li>
+                                <li class="scroll-to-section"><a href="/CartController">Giỏ hàng (<span class='text-danger'>2</span>)</a></li>
 
                                 <%
                                     Boolean checck = (Boolean) session.getAttribute("checklogin");
@@ -45,7 +45,7 @@
                                     <a href="javascript:;"><%= infoUser.getFullname()%></a>
                                     <ul>
                                         <li><a class='text-info' href="/CustomerController/ProfileUser">Thông tin tài khoản</a></li>
-                                        <li><a href="" class='text-info'>Đơn hàng</a></li>
+                                        <li><a href="/CustomerController/user-order" class='text-info'>123</a></li>
                                         <li><a href="" class='text-info'>Đơn hàng</a></li>
                                         <li><a href="" class='text-info'>Đơn hàng</a></li> 
                                         <li><a class='text-info' href="/CustomerController/Logout" >Đăng xuất</a></li>

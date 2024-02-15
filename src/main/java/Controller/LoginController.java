@@ -9,6 +9,7 @@ import LoginWithGoogle.Constants;
 import LoginWithGoogle.GooglePojo;
 import LoginWithGoogle.GoogleUtils;
 import Models.Users;
+import SendData.SendMail;
 import com.google.gson.Gson;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -73,6 +74,7 @@ public class LoginController extends HttpServlet {
         if (path.startsWith("/LoginController/Register")) {
             request.getRequestDispatcher("/sigup.jsp").forward(request, response);
         }
+        
     }
 
     /**
@@ -128,6 +130,7 @@ public class LoginController extends HttpServlet {
                 response.sendRedirect("/");
             }
         }
+        
     }
 
     /**

@@ -73,9 +73,15 @@
         <section class="section" id="product">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-8" style="position: relative">
                         <div class="left-images">
+                            
+                            <div style="position: absolute;right:20px; padding: 10px">
+                                <button onclick='AddtoWishlist()' data-toggle="tooltip" data-placement="top" title="Thêm vào danh sách yêu thích" id="wishlist-link"><i class="fa-sharp fa-solid fa-heart"></i></i></button>
+                                <a> </a>
+                            </div>
                             <img src='<%= rs.getString("Image")%>' alt="">
+
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -107,7 +113,21 @@
                 </div>
             </div>
         </section>
+                                              <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+                                                    function AddtoWishlist() {
+                                                        Swal.fire({
+                                                            position: "center",
+                                                            icon: "success",
+                                                            title: "Add Wishlist Succsesfully",
+                                                            showConfirmButton: false,
+                                                            timer: 1500
+                                                        });
+                                                    }
 
+
+        </script>
+        <script src="https://kit.fontawesome.com/ead2c7f559.js" crossorigin="anonymous"></script>
         <!-- ***** Product Area Ends ***** -->
 
         <!-- ***** Footer Start ***** -->
